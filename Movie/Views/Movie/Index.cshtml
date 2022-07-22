@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+</head>
+<body>
+    <h1>Movie</h1>
+    <label for="movieID">
+        Movie ID:
+    </label>
+    <input type="text" name="movieID" id="movieID" />
+    <button onclick="getHtml()">Html</button>
+    <button onclick="getJson()">Json</button>
+    <div id="output">
+    
+    </div>
+    <script>
+    function getHtml() {
+        let myOutput = document.getElementById("output");
+        let myMovieID = document.getElementById("movieID").value;
+
+        console.log(myMovieID);
+        
+
+        fetch("html?id=" + myMovieID, {
+            method: "GET",
+        })
+        .then(result => result.text())
+        .then(html => myOutput.innerHTML = html);
+        
+    }
+
+    function getJson() {
+    let myOutput = document.getElementById("output");
+    let myMovieID = document.getElementById("movieID").value;
+
+    console.log(myMovieID);
+    
+
+    fetch("json?id=" + myMovieID, {
+        method: "GET",
+    })
+    .then(result => result.json())
+    .then(obj => myOutput.innerHTML = obj);
+        
+    }
+    </script>
+
+</body>
+</html>
