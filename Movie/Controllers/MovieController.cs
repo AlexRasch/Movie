@@ -18,8 +18,16 @@ namespace Movie.Controllers
             return View();
         }
 
+
+        [Route("htmlall")]
+        public IActionResult htmlAll()
+        {
+            return PartialView("_MovieID", _moviesService.GetAll());
+        }
+
+
         [Route("html")]
-        public IActionResult html(int id)
+        public IActionResult html(int? id)
         {
             if(id == null)
             {
@@ -27,16 +35,22 @@ namespace Movie.Controllers
             }
 
             return PartialView("_MovieID", _moviesService.movieDic[id]);
+        }
 
-            //var viewModel = _moviesService.movieDic[id];
+        [Route("jsonall")]
+        public IActionResult jsonall()
+        {
 
-
-            //return Json(viewModel);
+            return Json(_moviesService.GetAll().Split('|'));
         }
 
         [Route("json")]
-        public IActionResult json(int id)
+        public IActionResult json(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             return Json(_moviesService.movieDic[id]);
         }

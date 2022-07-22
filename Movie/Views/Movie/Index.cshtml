@@ -13,11 +13,25 @@
     </label>
     <input type="text" name="movieID" id="movieID" />
     <button onclick="getHtml()">Html</button>
+    <button onclick="getHtmlAll()">Html All</button>
     <button onclick="getJson()">Json</button>
+    <button onclick="getJsonAll()">Json All</button>
     <div id="output">
     
     </div>
     <script>
+    function getHtmlAll() {
+    let myOutput = document.getElementById("output");
+
+    fetch("htmlall", {
+        method: "GET",
+    })
+    
+    .then(result => result.text())
+    .then(html => myOutput.innerHTML = html);
+        
+    }
+
     function getHtml() {
         let myOutput = document.getElementById("output");
         let myMovieID = document.getElementById("movieID").value;
@@ -33,6 +47,22 @@
         
     }
 
+    function getJsonAll() {
+
+        let response;
+
+        let myOutput = document.getElementById("output");
+    
+        fetch("jsonall", {
+            method: "GET",
+        })
+        .then(result => result.json())
+        .then(obj => response = obj)
+        .then(console.log(response));
+        
+    }
+
+
     function getJson() {
     let myOutput = document.getElementById("output");
     let myMovieID = document.getElementById("movieID").value;
@@ -45,7 +75,9 @@
     })
     .then(result => result.json())
     .then(obj => myOutput.innerHTML = obj);
-        
+     
+    
+
     }
     </script>
 
